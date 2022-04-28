@@ -18,7 +18,7 @@ type VaultData struct {
 }
 
 // Auth Authenticates user request
-func Auth(req handler.Request, api string) error {
+func Auth(req handler.Request, api, functionURL string) error {
 	email := req.Header.Get("email")
 	token := req.Header.Get("apitoken")
 
@@ -31,7 +31,7 @@ func Auth(req handler.Request, api string) error {
 	postHeaders["email"] = email
 	postHeaders["apitoken"] = token
 
-	b, err := httputils.PostRequest(vd, "10.62.0.1:8080", postHeaders)
+	b, err := httputils.PostRequest(vd, functionURL, postHeaders)
 	if err != nil {
 		return err
 	}
