@@ -39,7 +39,7 @@ func Auth(req handler.Request, api string) error {
 	m := make(map[string]string)
 	err = json.Unmarshal(b, &m)
 
-	if _, ok := m[email]; !ok {
+	if m[email] != token {
 		return fmt.Errorf("Unauthorized Access")
 	}
 	return nil
