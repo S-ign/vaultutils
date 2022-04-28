@@ -40,7 +40,7 @@ func Auth(req handler.Request, vaultEngine, functionURL string) error {
 	err = json.Unmarshal(b, &m)
 
 	if m[email] != token {
-		return fmt.Errorf(fmt.Sprintf("vault auth: Unauthorized Access\n%v~~%v", m[email], token))
+		return fmt.Errorf(fmt.Sprintf("vault auth: Unauthorized Access\n%v~~%v", string(b), token))
 	}
 	return nil
 }
