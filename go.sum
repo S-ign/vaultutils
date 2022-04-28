@@ -1,0 +1,4 @@
+github.com/S-ign/httputils v0.0.0-20220428043146-6deee252c600 h1:Zchi6hVvzH8cQgTziLlggVIdTy4XiFDp+R3Z/j0mnU4=
+github.com/S-ign/httputils v0.0.0-20220428043146-6deee252c600/go.mod h1:FwmpZ+NjYKZXI3u04PrQdCnZfu3n7l9INYkEPeWP9dg=
+github.com/openfaas/templates-sdk/go-http v0.0.0-20220408082716-5981c545cb03 h1:wMIW4ddCuogcuXcFO77BPSMI33s3QTXqLTOHY6mLqFw=
+github.com/openfaas/templates-sdk/go-http v0.0.0-20220408082716-5981c545cb03/go.mod h1:2vlqdjIdqUjZphguuCAjoMz6QRPm2O8UT0TaAjd39S8=
