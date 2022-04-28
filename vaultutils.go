@@ -18,14 +18,14 @@ type VaultData struct {
 }
 
 // Auth Authenticates user request
-func Auth(req handler.Request, api, functionURL string) error {
+func Auth(req handler.Request, vaultEngine, functionURL string) error {
 	email := req.Header.Get("email")
 	token := req.Header.Get("apitoken")
 
 	var vd VaultData
 	vd.AccessToken = "mC9Ucju63Z7%&O07GQvzvf@o"
 	vd.Action = "listSecretData"
-	vd.Path = fmt.Sprintf("%v/%v", api, email)
+	vd.Path = fmt.Sprintf("%v/%v", vaultEngine, email)
 
 	var postHeaders map[string]string
 	postHeaders["email"] = email
