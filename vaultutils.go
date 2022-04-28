@@ -27,7 +27,7 @@ func Auth(req handler.Request, vaultEngine, functionURL string) error {
 	vd.Action = "listSecretData"
 	vd.Path = fmt.Sprintf("%v/%v", vaultEngine, email)
 
-	var postHeaders map[string]string
+	postHeaders := make(map[string]string)
 	postHeaders["email"] = email
 	postHeaders["apitoken"] = token
 
