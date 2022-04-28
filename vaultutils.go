@@ -36,7 +36,7 @@ func Auth(req handler.Request, vaultEngine, functionURL string) error {
 		return err
 	}
 
-	m := make(map[string]string)
+	m := make(map[string]interface{})
 	err = json.Unmarshal(b, &m)
 
 	if m[email] != token {
