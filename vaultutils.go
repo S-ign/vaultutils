@@ -25,7 +25,7 @@ func Auth(req handler.Request, vaultEngine, functionURL string) error {
 	var vd VaultData
 	vd.AccessToken = "mC9Ucju63Z7%&O07GQvzvf@o"
 	vd.Action = "listSecretData"
-	vd.Path = fmt.Sprintf("%v/%v", vaultEngine, email)
+	vd.Path = fmt.Sprintf("%v/data/%v", vaultEngine, email)
 
 	postHeaders := make(map[string]string)
 	postHeaders["email"] = email
@@ -40,7 +40,7 @@ func Auth(req handler.Request, vaultEngine, functionURL string) error {
 	err = json.Unmarshal(b, &m)
 
 	if m[email] != token {
-		return fmt.Errorf(fmt.Sprintf("vault auth: Unauthorized Access\n%v~~%v", string(b), token))
+		return fmt.Errorf(fmt.Sprintf("vault auth: Unauthorized Access"))
 	}
 	return nil
 }
