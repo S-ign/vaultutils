@@ -37,14 +37,13 @@ func Auth(req handler.Request, vaultEngine, functionURL string) error {
 		return err
 	}
 
-	//m := make(map[string]interface{})
-	var data interface{}
+	data := make(map[string]interface{})
 	err = json.Unmarshal(b, &data)
 
-	switch m := data.(type) {
+	switch m := data["map"].(type) {
 	case map[string]string:
-		return fmt.Errorf(fmt.Sprintf("vault auth: Unauthorized Access\nb:%v\nm:%v~~token:%v\n\n%v", string(b), m, token, err))
+		return fmt.Errorf(fmt.Sprintf("vault auth: Unauthorized Access\nis [string]string\nb:%v\nm:%v~~token:%v\n\n%v", string(b), m, token, err))
 	default:
-		return fmt.Errorf(fmt.Sprintf("vault auth: Unauthorized Access\nb:%v\nm:%v~~token:%v\n\ntype: %v\n\n%v", string(b), m, token, reflect.TypeOf(m), err))
+		return fmt.Errorf(fmt.Sprintf("vault auth: Unauthorized Access\nis not [string]string\nb:%v\nm:%v~~token:%v\n\ntype: %v\n\n%v", string(b), m, token, reflect.TypeOf(m), err))
 	}
 }
