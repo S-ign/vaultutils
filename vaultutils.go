@@ -3,6 +3,7 @@ package vaultutils
 import (
 	"encoding/json"
 	"fmt"
+	"reflect"
 
 	"github.com/S-ign/httputils"
 	handler "github.com/openfaas/templates-sdk/go-http"
@@ -43,6 +44,7 @@ func Auth(req handler.Request, vaultEngine, functionURL string) error {
 	switch m := data.(type) {
 	case map[string]string:
 		return fmt.Errorf(fmt.Sprintf("vault auth: Unauthorized Access\nb:%v\nm:%v~~token:%v\n\n%v", string(b), m, token, err))
+	default:
+		return fmt.Errorf(fmt.Sprintf("vault auth: Unauthorized Access\nb:%v\nm:%v~~token:%v\n\ntype: %v\n\n%v", string(b), m, token, reflect.TypeOf(m), err))
 	}
-	return nil
 }
