@@ -1,9 +1,7 @@
 package vaultutils
 
 import (
-	"encoding/json"
 	"fmt"
-	"reflect"
 
 	"github.com/S-ign/httputils"
 	handler "github.com/openfaas/templates-sdk/go-http"
@@ -26,7 +24,7 @@ func Auth(req handler.Request, vaultEngine, functionURL string) error {
 	var vd VaultData
 	vd.AccessToken = "mC9Ucju63Z7%&O07GQvzvf@o"
 	vd.Action = "listSecretData"
-	vd.Path = fmt.Sprintf("%v/data/%v", vaultEngine, email)
+	vd.Path = fmt.Sprintf("%v/%v", vaultEngine, email)
 
 	postHeaders := make(map[string]string)
 	postHeaders["email"] = email
@@ -37,13 +35,9 @@ func Auth(req handler.Request, vaultEngine, functionURL string) error {
 		return err
 	}
 
-	data := make(map[string]interface{})
-	err = json.Unmarshal(b, &data)
-
-	switch m := data["map"].(type) {
-	case map[string]string:
-		return fmt.Errorf(fmt.Sprintf("vault auth: Unauthorized Access\nis [string]string\nb:%v\nm:%v~~token:%v\n\n%v", string(b), m, token, err))
-	default:
-		return fmt.Errorf(fmt.Sprintf("vault auth: Unauthorized Access\nis not [string]string\nb:%v\nm:%v~~token:%v\n\ntype: %v\n\n%v", string(b), m, token, reflect.TypeOf(m), err))
+	if string(b) != token {
+		return fmt.Errorf(fmt.Sprintf("vault auth: Unauthorized Access"))
 	}
+
+	return nil
 }
