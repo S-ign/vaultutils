@@ -17,6 +17,11 @@ type VaultData struct {
 	Value       string `json:"value"`
 }
 
+// Data
+type Data struct {
+	Keymap map[string]string `json:"keymap"`
+}
+
 // Auth Authenticates user request
 func Auth(req handler.Request, vaultEngine, functionURL string) error {
 	email := req.Header.Get("email")
@@ -36,10 +41,11 @@ func Auth(req handler.Request, vaultEngine, functionURL string) error {
 		return err
 	}
 
-	m := make(map[string]interface{})
+	//m := make(map[string]interface{})
+	var m Data
 	err = json.Unmarshal(b, &m)
 
-	if m[email] != token {
+	if m.Keymap[email] != token {
 		return fmt.Errorf(fmt.Sprintf("vault auth: Unauthorized Access\nb:%v\nm:%v~~token:%v\n\n%v", string(b), m, token, err))
 	}
 	return nil
