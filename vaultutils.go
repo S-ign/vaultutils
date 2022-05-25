@@ -25,6 +25,7 @@ func Auth(req handler.Request, vaultEngine, functionURL string) error {
 	vd.AccessToken = "mC9Ucju63Z7%&O07GQvzvf@o"
 	vd.Action = "getSecret"
 	vd.Path = fmt.Sprintf("%v/%v", vaultEngine, email)
+	vd.Key = "token"
 
 	postHeaders := make(map[string]string)
 	postHeaders["email"] = email
